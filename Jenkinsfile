@@ -25,5 +25,12 @@ pipeline {
                 }
             }
         }
+    stage('deply') {
+      
+      steps {
+        
+        sh "echo deploying!"
+      }
+    }
   }
 }
