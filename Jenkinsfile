@@ -27,12 +27,23 @@ pipeline {
             }
         }
 
-        stage ('Exec Maven') {
+        stage ('Build') {
             steps {
                 rtMavenRun (
                     tool: 'maven', // Tool name from Jenkins configuration
                     pom: 'pom.xml',
-                    goals: 'clean install test',
+                    goals: 'clean install',
+                    deployerId: "MAVEN_DEPLOYER",
+                    resolverId: "MAVEN_RESOLVER"
+                )
+            }
+        }
+        stage ('Test') {
+            steps {
+                rtMavenRun (
+                    tool: 'maven', // Tool name from Jenkins configuration
+                    pom: 'pom.xml',
+                    goals: 'test',
                     deployerId: "MAVEN_DEPLOYER",
                     resolverId: "MAVEN_RESOLVER"
                 )
