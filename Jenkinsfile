@@ -1,36 +1,50 @@
 pipeline {
-
-  agent any
-
-  stages {
-
-    stage('build') {
-
-      steps {
-
-        sh "mvn --version"
-        sh 'mvn -B -DskipTests clean package'
-
+    agent any
+    stages {
         
-      }
-    }
-    
-    stage('Test') {
+
+        stage ('Artifactory configuration') {
             steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+                rtServer (
+                    id: "ARTIFACTORY_SERVER",
+                    url: "http://localhost:8081/artifactory",
+                    credentialsId: "rt_login"
+                )
+
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "ARTIFACTORY_SERVER",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
+                )
+
+                rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "ARTIFACTORY_SERVER",
+                    releaseRepo: "libs-release",
+                    snapshotRepo: "libs-snapshot"
+                )
             }
         }
-    stage('deploy') {
-      
-      steps {
-        
-        sh "echo deploying!"
-      }
+
+        stage ('Exec Maven') {
+            steps {
+                rtMavenRun (
+                    tool: 'maven', // Tool name from Jenkins configuration
+                    pom: 'simple-java-maven-app/pom.xml',
+                    goals: 'clean install',
+                    deployerId: "MAVEN_DEPLOYER",
+                    resolverId: "MAVEN_RESOLVER"
+                )
+            }
+        }
+
+        stage ('Publish build info') {
+            steps {
+                rtPublishBuildInfo (
+                    serverId: "ARTIFACTORY_SERVER"
+                )
+            }
+        }
     }
-  }
 }
