@@ -32,7 +32,7 @@ pipeline {
                 rtMavenRun (
                     tool: 'maven', // Tool name from Jenkins configuration
                     pom: 'pom.xml',
-                    goals: 'clean install',
+                    goals: 'clean compile',
                     deployerId: "MAVEN_DEPLOYER",
                     resolverId: "MAVEN_RESOLVER"
                 )
@@ -44,6 +44,17 @@ pipeline {
                     tool: 'maven', // Tool name from Jenkins configuration
                     pom: 'pom.xml',
                     goals: 'test',
+                    deployerId: "MAVEN_DEPLOYER",
+                    resolverId: "MAVEN_RESOLVER"
+                )
+            }
+        }
+        stage ('Package') {
+            steps {
+                rtMavenRun (
+                    tool: 'maven', // Tool name from Jenkins configuration
+                    pom: 'pom.xml',
+                    goals: 'package',
                     deployerId: "MAVEN_DEPLOYER",
                     resolverId: "MAVEN_RESOLVER"
                 )
