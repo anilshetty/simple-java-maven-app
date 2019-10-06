@@ -24,6 +24,9 @@ pipeline {
                     releaseRepo: "libs-release",
                     snapshotRepo: "libs-snapshot"
                 )
+                rtBuildInfo (
+                    captureEnv: true
+                )
             }
         }
 
