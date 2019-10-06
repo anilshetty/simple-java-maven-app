@@ -7,7 +7,7 @@ pipeline {
             steps {
                 rtServer (
                     id: "ARTIFACTORY_SERVER",
-                    url: "http://localhost:8081/artifactory",
+                    url: "http://ashetty1d.mylabserver.com:8081/artifactory",
                     credentialsId: "rt_login"
                 )
 
