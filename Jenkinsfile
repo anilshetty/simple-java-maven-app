@@ -47,8 +47,7 @@ pipeline {
         stage ('Publish build info') {
             steps {
                 rtPublishBuildInfo (
-                    serverId: "ARTIFACTORY_SERVER",
-                    buildNumber: "${env.BUILD_NUMBER}"
+                    serverId: "ARTIFACTORY_SERVER"
                     
                 )
             }
@@ -59,7 +58,7 @@ pipeline {
                 
                 rtDownload (
                     
-                    buildNumber: "${env.BUILD_NUMBER}",
+                    
                     serverId: 'ARTIFACTORY_SERVER',
                     spec: '''{ "files": [
             {
