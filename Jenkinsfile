@@ -55,11 +55,15 @@ pipeline {
         stage ('Deploy') {
           steps {
               
+              withCredentials([string(credentialsId: 'ansible-vault-pwd', variable: 'ansible_vault_pwd')]) {
     ansiblePlaybook(
                 playbook: 'deploy.yml',
-                colorized: true
-                
+                colorized: true,
+                vaultCredentialsId: 'ansible-vault-pwd'
     )
+              }   
+              
+              
                           
             
           }
