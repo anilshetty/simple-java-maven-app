@@ -55,6 +55,7 @@ pipeline {
         }
         stage ('Download') {
             steps {
+                input { message: "should we download?" }
                 rtDownload (
                     
                     buildNumber: "${env.BUILD_NUMBER}",
