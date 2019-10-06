@@ -54,7 +54,7 @@ pipeline {
             }
         }
         stage ('Download') {
-            input { message: "should we download?" }
+            input { message "should we download?" }
             steps {
                 
                 rtDownload (
