@@ -41,7 +41,7 @@ pipeline {
                     resolverId: "MAVEN_RESOLVER"
                 )
             }
-        }
+        }my
         
 
         stage ('Publish build info') {
@@ -63,7 +63,7 @@ pipeline {
                     serverId: 'ARTIFACTORY_SERVER',
                     spec: '''{ "files": [
             {
-              "pattern": "libs-snapshot-local/com/mycompany/app/my-app/1.0-SNAPSHOT-${env.BUILD_NUMBER}/my-app-1.0-SNAPSHOT-${env.BUILD_NUMBER}.jar",
+              "pattern": "libs-snapshot-local/com/mycompany/app/my-app/1.0-SNAPSHOT-${env.BUILD_NUMBER}/*",
               "target": "/tmp/"
             }
          ]
