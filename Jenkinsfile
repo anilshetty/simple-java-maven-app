@@ -41,7 +41,7 @@ pipeline {
                     resolverId: "MAVEN_RESOLVER"
                 )
             }
-        }my
+        }
         
 
         stage ('Publish build info') {
