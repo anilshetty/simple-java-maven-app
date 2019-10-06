@@ -44,6 +44,7 @@ pipeline {
             steps {
                 rtPublishBuildInfo (
                     serverId: "ARTIFACTORY_SERVER"
+                    buildNumber: "${env.BUILD_NUMBER}"
                 )
             }
         }
