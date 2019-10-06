@@ -52,5 +52,21 @@ pipeline {
                 )
             }
         }
+        stage ('Download') {
+            steps {
+                rtDownload (
+                    
+                    buildNumber: "${env.BUILD_NUMBER}",
+                    serverId: 'ARTIFACTORY_SERVER',
+                    spec: '''{ "files": [
+            {
+              "pattern": "libs-snapshot-local/com/mycompany/app/my-app/1.0-SNAPSHOT/*.jar",
+              "target": "/tmp/"
+            }
+         ]
+    }'''
+                )
+            }
+        }
     }
 }
