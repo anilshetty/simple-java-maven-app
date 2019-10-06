@@ -52,6 +52,17 @@ pipeline {
                 )
             }
         }
-        
+        stage ('Deploy') {
+          steps {
+              
+    ansiblePlaybook(
+                playbook: 'deploy.yml',
+                colorized: true
+                
+    )
+                          
+            
+          }
+        }
     }
 }
