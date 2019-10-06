@@ -56,13 +56,11 @@ pipeline {
             input { message "should we download?" }
             steps {
                 
-                rtDownload (
-                    
-                    
+                rtDownload (                   
                     serverId: 'ARTIFACTORY_SERVER',
                     spec: '''{ "files": [
             {
-              "pattern": "libs-snapshot-local/com/mycompany/app/my-app/1.0-SNAPSHOT-${env.BUILD_NUMBER}/*",
+              "pattern": "libs-snapshot-local/com/mycompany/app/my-app/1.0-SNAPSHOT-44/*",
               "target": "/tmp/"
             }
          ]
