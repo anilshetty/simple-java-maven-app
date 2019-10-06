@@ -52,21 +52,6 @@ pipeline {
                 )
             }
         }
-        stage ('Download') {
-            input { message "should we download?" }
-            steps {
-                
-                rtDownload (                   
-                    serverId: 'ARTIFACTORY_SERVER',
-                    spec: '''{ "files": [
-            {
-              "pattern": "libs-snapshot-local/com/mycompany/app/my-app/1.0-SNAPSHOT-44/*",
-              "target": "/tmp/"
-            }
-         ]
-    }'''
-                )
-            }
-        }
+        
     }
 }
