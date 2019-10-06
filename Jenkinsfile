@@ -36,7 +36,7 @@ pipeline {
                     tool: 'maven', // Tool name from Jenkins configuration
                     pom: 'pom.xml',
                     goals: 'clean package',
-                    args: '-DbuildNumber="${env.BUILD_NUMBER}"'
+                    args: '-DbuildNumber="${env.BUILD_NUMBER}"',
                     deployerId: "MAVEN_DEPLOYER",
                     resolverId: "MAVEN_RESOLVER"
                 )
