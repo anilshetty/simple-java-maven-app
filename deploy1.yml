@@ -1,0 +1,32 @@
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - keys.yml
+  tasks:
+    - name: create a new ec2 keypair
+      ec2_key:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        ec2_region: "{{ AWS_REGION }}"
+        name: my_keypair
+
+    - name: Provision instance
+      ec2:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"  
+        ec2_region: "{{ AWS_REGION }}"
+        instance_type: t2.micro
+        keypair: my_keypair
+        image: ami-098bb5d92c8886ca1 #RHEL 8
+        assign_public_ip: yes
+        vpc_subnet_id: subnet-0b3eb935
+        group: mysecgp
+        wait: true
+        exact_count: 1
+        count_tag: 
+          Name: Demo
+        instance_tags:
+          Name: Demo
+      register: ec2
+    - debug:
+        var: ec2
