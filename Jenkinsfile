@@ -1,5 +1,14 @@
 pipeline {
     agent any
+    environment { 
+        withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_KEY')]) {
+    // some block
+            AWS_ACCESS_KEY_ID = "${AWS_KEY}"
+}
+    withCredentials([string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET')]) {
+        AWS_SECRET_ACCESS_KEY = "${AWS_SECRET}"
+}
+    }
     stages {
         
 
@@ -48,6 +57,14 @@ pipeline {
             steps {
                 rtPublishBuildInfo (
                     serverId: "ARTIFACTORY_SERVER"
+                    
+                )
+            }
+        }
+        stage ('Print') {
+            steps {
+                sh "echo $AWS_ACCESS_KEY_ID"
+                sh "echo $AWS_SECRET_ACCESS_KEY"
                     
                 )
             }
