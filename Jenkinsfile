@@ -3,10 +3,10 @@ pipeline {
     environment { 
         withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_KEY')]) {
     // some block
-            AWS_ACCESS_KEY_ID = "${AWS_KEY}"
+            AWSKEYID = "${AWS_KEY}"
 }
     withCredentials([string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET')]) {
-        AWS_SECRET_ACCESS_KEY = "${AWS_SECRET}"
+        AWSSECRET = "${AWS_SECRET}"
 }
     }
     stages {
@@ -63,8 +63,8 @@ pipeline {
         }
         stage ('Print') {
             steps {
-                sh "echo $AWS_ACCESS_KEY_ID"
-                sh "echo $AWS_SECRET_ACCESS_KEY"
+                sh "echo $AWSKEYID"
+                sh "echo $AWSSECRET"
                     
                 
             }
