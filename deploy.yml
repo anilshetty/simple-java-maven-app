@@ -11,3 +11,8 @@
         dest: "/tmp/test.jar"
     - stat: 
         path: "/tmp/test.jar"
+        
+- name: ping host
+  hosts: tag_Name_CMDC
+  tasks:
+    - ping:
