@@ -1,13 +1,10 @@
 pipeline {
     agent any
     environment { 
-        withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_KEY')]) {
-    // some block
-            AWSKEYID = "${AWS_KEY}"
-}
-    withCredentials([string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET')]) {
-        AWSSECRET = "${AWS_SECRET}"
-}
+        
+            AWSKEYID = credentials('AWS_ACCESS_KEY_ID')
+            AWSSECRET = credentials('AWS_SECRET_ACCESS_KEY'')
+
     }
     stages {
         
