@@ -61,8 +61,7 @@ pipeline {
         }
         stage ('Print') {
             steps {
-                sh "echo $AWSKEYID"
-                sh "echo $AWSSECRET"
+                
                 sh "echo $ANSIBLE_HOSTS"
                 sh "echo $EC2_INI_PATH"
                     
