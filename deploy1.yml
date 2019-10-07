@@ -31,6 +31,10 @@
     - debug:
         var: ec2
         
+    - name: Check hosts
+      shell: /etc/ansible/ec2.py --list
+        
+        
 - hosts: tag_Name_CMDC
   gather_facts: no
   remote_user: ec2-user
