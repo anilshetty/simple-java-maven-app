@@ -1,10 +1,18 @@
 ---
 - name: Download Application from Repo
   hosts: localhost
+  vars_files:
+    - keys.yml
   tasks:
     - get_url:
         force: yes
         url: "http://localhost:8081/artifactory/libs-snapshot-local/com/mycompany/app/my-app/1.0-SNAPSHOT-44/my-app-1.0-SNAPSHOT-44.jar"
+        headers:  "X-JFrog-Art-Api:{{ ARTIFACTORY_API_KEY }}"
         dest: "/tmp/test.jar"
     - stat: 
         path: "/tmp/test.jar"
+        
+- name: ping host
+  hosts: tag_Name_CMDC
+  tasks:
+    - ping:

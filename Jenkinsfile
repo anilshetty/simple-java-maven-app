@@ -1,5 +1,12 @@
 pipeline {
     agent any
+    environment { 
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        ANSIBLE_HOSTS = "/etc/ansible/ec2.py"
+        EC2_INI_PATH = "/etc/ansible/ec2.ini"
+
+    }
     stages {
         
 
@@ -52,14 +59,29 @@ pipeline {
                 )
             }
         }
+        stage ('Print') {
+            steps {
+                
+                sh "echo $ANSIBLE_HOSTS"
+                sh "echo $EC2_INI_PATH"
+                sh "/etc/ansible/ec2.py --list"
+                sh "ansible tag_Name_CMDC -i /etc/ansible/ec2.py -m ping"
+                    
+                
+            }
+        }
         stage ('Deploy') {
           steps {
               
+              withCredentials([string(credentialsId: 'ansible-vault-pwd', variable: 'ansible_vault_pwd')]) {
     ansiblePlaybook(
                 playbook: 'deploy.yml',
-                colorized: true
-                
+                colorized: true,
+                vaultCredentialsId: 'ansible-vault-pwd'
     )
+              }   
+              
+              
                           
             
           }
