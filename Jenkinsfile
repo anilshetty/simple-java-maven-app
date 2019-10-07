@@ -64,6 +64,7 @@ pipeline {
                 
                 sh "echo $ANSIBLE_HOSTS"
                 sh "echo $EC2_INI_PATH"
+                sh "/etc/ansible/ec2.py --list"
                 sh "ansible tag_Name_CMDC -i /etc/ansible/ec2.py -m ping"
                     
                 
