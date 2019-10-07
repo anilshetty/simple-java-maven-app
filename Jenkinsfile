@@ -65,7 +65,7 @@ pipeline {
                 sh "echo $ANSIBLE_HOSTS"
                 sh "echo $EC2_INI_PATH"
                 sh "/etc/ansible/ec2.py --list"
-                sh "ansible tag_Name_CMDC -i /etc/ansible/ec2.py -m ping"
+                
                     
                 
             }
@@ -75,7 +75,7 @@ pipeline {
               
               withCredentials([string(credentialsId: 'ansible-vault-pwd', variable: 'ansible_vault_pwd')]) {
     ansiblePlaybook(
-                playbook: 'deploy.yml',
+                playbook: 'deploy1.yml',
                 colorized: true,
                 vaultCredentialsId: 'ansible-vault-pwd'
     )
