@@ -1,8 +1,10 @@
 pipeline {
     agent any
     environment { 
-        AWSKEYID = credentials('AWS_ACCESS_KEY_ID')
-        AWSSECRET = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        ANSIBLE_HOSTS = "/etc/ansible/ec2.py"
+        EC2_INI_PATH = "/etc/ansible/ec2.ini"
 
     }
     stages {
@@ -61,6 +63,8 @@ pipeline {
             steps {
                 sh "echo $AWSKEYID"
                 sh "echo $AWSSECRET"
+                sh "echo $ANSIBLE_HOSTS"
+                sh "echo $EC2_INI_PATH"
                     
                 
             }
