@@ -75,7 +75,7 @@ pipeline {
               
               withCredentials([string(credentialsId: 'ansible-vault-pwd', variable: 'ansible_vault_pwd')]) {
     ansiblePlaybook(
-                playbook: 'deploy.yml',
+                playbook: 'deploy1.yml',
                 colorized: true,
                 vaultCredentialsId: 'ansible-vault-pwd'
     )
