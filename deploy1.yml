@@ -28,6 +28,7 @@
         
 - hosts: tag_Name_webserver
   gather_facts: no
+  become: yes
   remote_user: ec2-user
   tasks:
     - name: ping the server
