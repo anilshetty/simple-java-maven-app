@@ -3,12 +3,6 @@
   vars_files:
     - keys.yml
   tasks:
-    - name: create a new ec2 keypair
-      ec2_key:
-        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
-        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
-        ec2_region: "{{ AWS_REGION }}"
-        name: my_keypair
 
     - name: Provision instance
       ec2:
@@ -16,7 +10,7 @@
         aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"  
         ec2_region: "{{ AWS_REGION }}"
         instance_type: t2.micro
-        keypair: my_keypair
+        keypair: jenkinsKP
         image: ami-098bb5d92c8886ca1 #RHEL 8
         assign_public_ip: yes
         vpc_subnet_id: subnet-0b3eb935
@@ -36,8 +30,7 @@
   gather_facts: no
   remote_user: ec2-user
   tasks:
-    - name: install nginx
-      yum:
-        name: nginx
-        state: latest
+    - name: ping the server
+      ping:
+        
         
