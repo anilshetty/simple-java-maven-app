@@ -36,7 +36,8 @@
   gather_facts: no
   remote_user: ec2-user
   tasks:
-    - name: Wait for SSH to come up
-      wait_for_connection:
-        delay: 60
-        timeout: 300
+    - name: install nginx
+      yum:
+        name: nginx
+        state: latest
+        
