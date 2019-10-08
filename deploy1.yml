@@ -31,6 +31,11 @@
   become: yes
   remote_user: ec2-user
   tasks:
+    - name: wait for SSH
+      wait_for_connection:
+        delay: 120
+        timeout: 360
+        
     - name: ping the server
       ping:
       
