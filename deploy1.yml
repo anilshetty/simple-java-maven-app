@@ -18,15 +18,15 @@
         wait: true
         exact_count: 1
         count_tag: 
-          Name: Demo
+          Name: webserver
         instance_tags:
-          Name: Demo
+          Name: webserver
       register: ec2
     - debug:
         var: ec2
                 
         
-- hosts: tag_Name_Demo
+- hosts: tag_Name_webserver
   gather_facts: no
   remote_user: ec2-user
   tasks:
