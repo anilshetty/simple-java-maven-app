@@ -4,6 +4,7 @@ pipeline {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         ANSIBLE_HOSTS = "/etc/ansible/ec2.py"
+        ANSIBLE_INVENTORY = "/etc/ansible/ec2.py"
         EC2_INI_PATH = "/etc/ansible/ec2.ini"
 
     }
