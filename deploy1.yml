@@ -32,5 +32,10 @@
   tasks:
     - name: ping the server
       ping:
+      
+    - name: install nginx
+      yum:
+        name: nginx
+        state: latest
         
         
